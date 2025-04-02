@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import rospy
+from geometry_msgs.msg import Quaternion
+
+if __name__ == "__main__": # Inicio del programa principal
+
+    # Inicializar el nodo
+    rospy.init_node('nodo_publicador_quaternion')
+
+    # Declarar del publicador
+    topic = 'topic_quat'
+    pub = rospy.Publisher(topic, Quaternion, queue_size=1)
+    
+    # Creación de una instancia (vacía) del mensaje
+    quat_msg = Quaternion()
+
+    # Tiempo de ejecución del bucle (en Hz)
+    rate = rospy.Rate(10)    # 10hz
+    while not rospy.is_shutdown():
+        # Asignar los valores al mensaje
+        quat_msg.x = 0.0
+        quat_msg.y = 0.0
+        quat_msg.z = 0.0
+        quat_msg.w = 1.0
+        # Publicar el mensaje
+        pub.publish(quat_msg)
+        # Esperar
+        rate.sleep()

@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+import rospy
+from geometry_msgs.msg import Pose
+
+if __name__ == "__main__": # Inicio del programa principal
+
+    # Inicializar el nodo
+    rospy.init_node('nodo_publicador_pose')
+
+    # Declarar del publicador
+    topic = 'topic_pose'
+    pub = rospy.Publisher(topic, Pose, queue_size=1)
+    
+    # Creación de una instancia (vacía) del mensaje
+    pose_msg = Pose()
+
+    # Tiempo de ejecución del bucle (en Hz)
+    rate = rospy.Rate(10)    # 10hz
+    while not rospy.is_shutdown():
+        # Asignar los valores al mensaje
+        pose_msg.position.x = 2.0
+        pose_msg.position.y = 5.0
+        pose_msg.position.z = 1.0
+        pose_msg.orientation.x = 0.0
+        pose_msg.orientation.y = 0.0
+        pose_msg.orientation.z = 0.0
+        pose_msg.orientation.w = 1.0
+        # Publicar el mensaje
+        pub.publish(pose_msg)
+        # Esperar
+        rate.sleep()

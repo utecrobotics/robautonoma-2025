@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>autlab1</name>
+  <version>0.0.0</version>
+  <description>Laboratorio 1 - Robotica Autonoma</description>
+
+  <maintainer email="oramos@todo.todo">oramos</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+</package>

@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+import rospy
+from geometry_msgs.msg import Point
+
+if __name__ == "__main__": # Inicio del programa principal
+
+    # Inicializar el nodo
+    rospy.init_node('nodo_publicador_point')
+
+    # Declarar del publicador
+    topic = 'topic_point' 
+    pub = rospy.Publisher(topic, Point, queue_size=1)
+    
+    # Creación de una instancia (vacía) del mensaje
+    point_msg = Point()
+
+    # Tiempo de ejecución del bucle (en Hz)
+    rate = rospy.Rate(10)    # 10hz
+    while not rospy.is_shutdown():
+        # Asignar los valores al mensaje
+        point_msg.x = 2.0
+        point_msg.y = 5.0
+        point_msg.z = 1.0
+        # Publicar el mensaje
+        pub.publish(point_msg)
+        # Esperar
+        rate.sleep()
