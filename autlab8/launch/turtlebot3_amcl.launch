@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<launch>
+  <!-- Map server -->
+  <!-- <arg name="map_file" default="$(env MAP_FILE)"/> -->
+  <arg name="map_file" default="my_map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- AMCL -->
+  <arg name="custom_amcl_launch_file" default="$(find autlab8)/launch/amcl_turtlebot3/turtlebot3_amcl_helper.launch"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
+  <include file="$(arg custom_amcl_launch_file)">
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+
+  <arg name="config_file" value="$(find autlab8)/config/localization.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" output="screen" args="-d $(arg config_file)"/>
+  
+</launch>
+
